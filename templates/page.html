@@ -59,4 +59,11 @@
     {{ super() }}
     {% from '_includes/comments.html' import comments_script with context %}
     {{ comments_script(page) }}
+    {% set depends = page.depends.split(', ') if page.depends else [] %}
+    {% if 'mathjax' in depends %}
+        {% include '_includes/mathjax.html' %}
+    {% endif %}
+    {% if 'highcharts' in depends %}
+        <script src="http://code.highcharts.com/highcharts.js"></script>
+    {% endif %}
     {% endblock script %}
